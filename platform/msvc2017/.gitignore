@@ -1,0 +1,4 @@
+bs/
+projects/*
+
+!projects/bs.vcxproj
