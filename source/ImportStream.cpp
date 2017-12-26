@@ -1,6 +1,8 @@
 #include "bs/ImportStream.h"
+#include "bs/typedef.h"
 
 #include <guard/check.h>
+#include <memmgr/LinearAllocator.h>
 
 #include <string.h>
 
@@ -75,6 +77,23 @@ std::string ImportStream::String()
 	m_size -= n;
 
 	return str;
+}
+
+const char* ImportStream::String(mm::LinearAllocator& alloc)
+{
+	int n = UInt16();
+	if (n == 0xffff) {
+		return nullptr;
+	}
+	GD_ASSERT(m_size >= n, "Invalid import String");
+
+	char* buf = static_cast<char*>(alloc.alloc<char>(ALIGN_4BYTE(n + 1)));
+	memcpy(buf, m_stream, n);
+	buf[n] = 0;
+	m_stream += n;
+	m_size -= n;
+
+	return buf;
 }
 
 const char* ImportStream::Block(int sz)

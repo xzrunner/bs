@@ -6,6 +6,8 @@
 
 #include <stdint.h>
 
+namespace mm { class LinearAllocator;  }
+
 namespace bs
 {
 
@@ -19,8 +21,10 @@ public:
 	uint16_t UInt16();
 	uint32_t UInt32();
 
-	float       Float();
+	float Float();
+
 	std::string String();
+	const char* String(mm::LinearAllocator& alloc);
 
 	const char* Block(int sz);
 
