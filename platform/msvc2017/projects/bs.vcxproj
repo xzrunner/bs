@@ -11,15 +11,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\bs\ExportStream.h" />
     <ClInclude Include="..\..\..\include\bs\FixedPointNum.h" />
     <ClInclude Include="..\..\..\include\bs\ImportStream.h" />
     <ClInclude Include="..\..\..\include\bs\Serializer.h" />
     <ClInclude Include="..\..\..\include\bs\typedef.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\include\bs\ExportStream.inl" />
     <None Include="..\..\..\include\bs\Serializer.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\source\ExportStream.cpp" />
     <ClCompile Include="..\..\..\source\ImportStream.cpp" />
     <ClCompile Include="..\..\..\source\Serializer.cpp" />
   </ItemGroup>
