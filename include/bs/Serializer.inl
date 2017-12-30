@@ -27,35 +27,48 @@ inline void unpack(T& d, const uint8_t** ptr)
 	*ptr += sizeof(d);
 }
 
+static inline
+size_t pack_size_str(const char* str)
+{
+	size_t len = strlen(str);
+	if (len == 0) {
+		return sizeof(uint16_t);
+	} else {
+		GD_ASSERT(len <= 0xffff, "str too long");
+		return sizeof(uint16_t) + len;
+	}
+}
+
+static inline
+void pack_str(const char* str, uint8_t** ptr)
+{
+	size_t len = strlen(str);
+	if (len == 0)
+	{
+		uint16_t c = 0xffff;
+		pack(c, ptr);
+	}
+	else
+	{
+		GD_ASSERT(len <= 0xffff, "str too long");
+		pack(static_cast<uint16_t>(len), ptr);
+		for (size_t i = 0; i < len; ++i) {
+			uint8_t c = str[i];
+			pack(c, ptr);
+		}
+	}
+}
+
 template<>
 inline size_t pack_size(const std::string& str)
 {
-	if (str.empty()) {
-		return sizeof(uint16_t);
-	} else {
-		GD_ASSERT(str.size() <= 0xffff, "str too long");
-		return sizeof(uint16_t) + str.size();
-	}
+	return pack_size_str(str.c_str());
 }
 
 template<>
 inline void pack(const std::string& str, uint8_t** ptr)
 {
-	if (str.empty()) 
-	{
-		uint16_t c = 0xffff;
-		pack(c, ptr);
-	} 
-	else 
-	{
-		GD_ASSERT(str.size() <= 0xffff, "str too long");
-		uint16_t sz = static_cast<uint16_t>(str.size());
-		pack(sz, ptr);
-		for (int i = 0; i < sz; ++i) {
-			uint8_t c = str[i];
-			pack(c, ptr);
-		}
-	}
+	pack_str(str.c_str(), ptr);
 }
 
 template<>
@@ -74,6 +87,18 @@ inline void unpack(std::string& str, const uint8_t** ptr)
 		unpack(c, ptr);
 		str.push_back((char)c);
 	}
+}
+
+template<>
+inline size_t pack_size(const char* str)
+{
+	return pack_size_str(str);
+}
+
+template<>
+inline void pack(const char* str, uint8_t** ptr)
+{
+	pack_str(str, ptr);
 }
 
 template<typename T>
