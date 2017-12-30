@@ -15,10 +15,6 @@ ImportStream::ImportStream(const char* data, int sz)
 {
 }
 
-ImportStream::~ImportStream()
-{
-}
-
 uint8_t ImportStream::UInt8()
 {
 	GD_ASSERT(m_size > 0, "Invalid import UInt8");
@@ -26,6 +22,7 @@ uint8_t ImportStream::UInt8()
 	uint8_t ret = (uint8_t)*(m_stream);
 	++m_stream;
 	--m_size;
+
 	return ret;	
 }
 

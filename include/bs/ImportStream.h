@@ -15,7 +15,6 @@ class ImportStream : private cu::Uncopyable
 {
 public:
 	ImportStream(const char* data, int sz);
-	virtual ~ImportStream();
 
 	uint8_t  UInt8();
 	uint16_t UInt16();
@@ -33,7 +32,7 @@ public:
 
 	bool Empty() const { return m_size == 0; }
 
-protected:
+private:
 	const char* m_stream;
 	int m_size;
 
