@@ -17,6 +17,8 @@ public:
 
 	void WriteBlock(const uint8_t* data, size_t len);
 	
+	bool Empty() const { return m_size == 0; }
+
 private:
 	uint8_t* m_stream;
 	int      m_size;
