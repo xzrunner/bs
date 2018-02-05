@@ -2,3 +2,4 @@ bs/
 projects/*
 
 !projects/bs.vcxproj
+!projects/bs.vcxproj.filters
