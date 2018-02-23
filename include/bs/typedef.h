@@ -4,10 +4,10 @@
 #define ALIGN_4BYTE(x) (((x) + 3) & ~3)
 #endif // ALIGN_4BYTE
 
-namespace bs
-{
+#ifndef PTR_SIZE_DIFF
+#define PTR_SIZE_DIFF (8 - sizeof(void *))
+#endif // PTR_SIZE_DIFF
 
-static const int PTR_SIZE_DIFF = (8 - sizeof(void *));
-static const int SIZEOF_POINTER = 8;
-
-}
+#ifndef SIZEOF_POINTER
+#define SIZEOF_POINTER 8
+#endif // SIZEOF_POINTER
