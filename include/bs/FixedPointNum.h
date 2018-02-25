@@ -1,7 +1,5 @@
 #pragma once
 
-#include <sm_const.h>
-
 #include <math.h>
 
 namespace bs
@@ -16,7 +14,7 @@ int time2int(float time) {
 
 inline
 int radian2int(float r) {
-	return static_cast<int>(floor(r * SM_RAD_TO_DEG + 0.5f));
+	return static_cast<int>(floor(r * 180.0f / 3.1415926f + 0.5f));
 }
 
 inline
@@ -42,7 +40,7 @@ float int2time(int time) {
 
 inline
 float int2radian(int deg) {
-	return deg * SM_DEG_TO_RAD;
+	return deg * 3.1415926f / 180.0f;
 }
 
 inline
