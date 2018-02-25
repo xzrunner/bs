@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cu/uncopyable.h>
+#include <boost/noncopyable.hpp>
 
 #include <string>
 
@@ -11,7 +11,7 @@ namespace mm { class LinearAllocator;  }
 namespace bs
 {
 
-class ImportStream : private cu::Uncopyable
+class ImportStream : boost::noncopyable
 {
 public:
 	ImportStream(const char* data, int sz);

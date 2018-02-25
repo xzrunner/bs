@@ -1,13 +1,13 @@
 #pragma once
 
-#include <cu/uncopyable.h>
+#include <boost/noncopyable.hpp>
 
 #include <stdint.h>
 
 namespace bs
 {
 	
-class ExportStream : private cu::Uncopyable
+class ExportStream : boost::noncopyable
 {
 public:
 	ExportStream(uint8_t* data, size_t sz);
