@@ -12,8 +12,9 @@ void ExportStream::Write(const T& data)
 	if (m_stream)
 	{
 		pack(data, &m_stream);
-		m_stream_sz -= pack_size(data);
-		GD_ASSERT(m_stream_sz >= 0, "export error.");
+		auto need = pack_size(data);
+		GD_ASSERT(m_stream_sz >= need, "export error.");
+		m_stream_sz -= need;
 	}
 	else
 	{
@@ -27,8 +28,9 @@ void ExportStream::Write(const T& data)
 	}
 #else
 	pack(data, &m_stream);
-	m_stream_sz -= pack_size(data);
-	GD_ASSERT(m_stream_sz >= 0, "export error.");
+	auto need = pack_size(data);
+	GD_ASSERT(m_stream_sz >= need, "export error.");
+	m_stream_sz -= need;
 #endif // BS_ES_AUTO_ALLOC
 }
 
