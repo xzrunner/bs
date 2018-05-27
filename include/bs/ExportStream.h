@@ -27,6 +27,8 @@ public:
 
 	bool Empty() const;
 
+	size_t Size() const;
+
 #ifdef BS_ES_AUTO_ALLOC
 private:
 	void PrepareBuf(size_t need);

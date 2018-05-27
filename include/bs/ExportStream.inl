@@ -41,4 +41,13 @@ inline bool ExportStream::Empty() const
 #endif // BS_ES_AUTO_ALLOC
 }
 
+inline size_t ExportStream::Size() const
+{
+#ifdef BS_ES_AUTO_ALLOC
+	return m_stream ? m_stream_sz : m_buf_sz;
+#else
+	return m_stream_sz;
+#endif // BS_ES_AUTO_ALLOC
+}
+
 }
