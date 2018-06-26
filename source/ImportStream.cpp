@@ -23,7 +23,7 @@ uint8_t ImportStream::UInt8()
 	++m_stream;
 	--m_size;
 
-	return ret;	
+	return ret;
 }
 
 uint16_t ImportStream::UInt16()
@@ -91,6 +91,19 @@ const char* ImportStream::String(mm::LinearAllocator& alloc)
 	m_size -= n;
 
 	return buf;
+}
+
+std::string ImportStream::String(int size)
+{
+	std::vector<char> buffer;
+	buffer.resize(size + 1);
+	buffer[size] = 0;
+
+	std::memcpy(buffer.data(), m_stream, size);
+	m_stream += size;
+	m_size -= size;
+
+	return std::string(buffer.data());
 }
 
 const char* ImportStream::Block(int sz)

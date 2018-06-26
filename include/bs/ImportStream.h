@@ -24,6 +24,7 @@ public:
 
 	std::string String();
 	const char* String(mm::LinearAllocator& alloc);
+	std::string String(int size);
 
 	const char* Block(int sz);
 
