@@ -11,7 +11,7 @@ class ImportStream;
 
 template<typename T>
 size_t pack_size(const T&);
-	
+
 template<typename T>
 void pack(const T& d, uint8_t** ptr);
 
